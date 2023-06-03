@@ -18,13 +18,16 @@ public class TaskJDBCDao implements ITaskDao {
         List<TaskCreateDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT cur_id, cur_date, cur_official_rate FROM " +
-                     "app.rate ORDER BY cur_id ASC")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, status " +
+                     "FROM app.task ORDER BY task_id ASC;")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 TaskCreateDTO dto = new TaskCreateDTO();
-
+                dto.setHeader(rs.getString("header"));
+                dto.setDescription(rs.getString("description"));
+                dto.setDeadline(rs.getDate("deadline").toLocalDate().atStartOfDay());
+                dto.setStatus(rs.getInt("status"));
 
                 data.add(dto);
             }
