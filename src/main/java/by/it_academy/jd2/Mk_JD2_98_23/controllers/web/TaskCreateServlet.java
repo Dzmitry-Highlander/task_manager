@@ -15,12 +15,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-@WebServlet("/api/task/create_task")
+@WebServlet("/api/create")
 public class TaskCreateServlet extends HttpServlet {
     private static final String HEADER = "header";
     private static final String DESCRIPTION = "description";
     private static final String DEADLINE = "deadline";
     private static final String STATUS  = "status";
+    private static final String EXECUTOR = "executor";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -37,6 +38,7 @@ public class TaskCreateServlet extends HttpServlet {
         String description = req.getParameter(DESCRIPTION);
         String deadline = req.getParameter(DEADLINE);
         String status = req.getParameter(STATUS);
+        String executor = req.getParameter(EXECUTOR);
 
         if (true) {
             LocalDate deadlineParsed = LocalDate.parse(deadline);
@@ -44,6 +46,7 @@ public class TaskCreateServlet extends HttpServlet {
 
             TaskCreateDTO dto = new TaskCreateDTO(header, description, deadlineParsed, statusParsed);
 
+            taskService.save(dto);
             writer.write(objectMapper.writeValueAsString(taskService.save(dto)));
         }
     }
