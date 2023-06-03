@@ -21,7 +21,6 @@ public class TaskCreateServlet extends HttpServlet {
     private static final String DESCRIPTION = "description";
     private static final String DEADLINE = "deadline";
     private static final String STATUS  = "status";
-    private static final String EXECUTOR = "executor";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -38,7 +37,6 @@ public class TaskCreateServlet extends HttpServlet {
         String description = req.getParameter(DESCRIPTION);
         String deadline = req.getParameter(DEADLINE);
         String status = req.getParameter(STATUS);
-        String executor = req.getParameter(EXECUTOR);
 
         if (true) {
             LocalDate deadlineParsed = LocalDate.parse(deadline);
