@@ -8,12 +8,12 @@ public class TaskDTO {
     private String header;
     private String description;
     private LocalDateTime deadline;
-    private Status status;
+    private int status;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(String header, String description, LocalDateTime deadline, Status status) {
+    public TaskDTO(String header, String description, LocalDateTime deadline, int status) {
         this.header = header;
         this.description = description;
         this.deadline = deadline;
@@ -44,11 +44,11 @@ public class TaskDTO {
         this.deadline = deadline;
     }
 
-    public Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
