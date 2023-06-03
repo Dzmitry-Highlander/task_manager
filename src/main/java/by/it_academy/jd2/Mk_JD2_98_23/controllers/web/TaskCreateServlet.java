@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-@WebServlet("/api/create")
+@WebServlet("/api/create_task")
 public class TaskCreateServlet extends HttpServlet {
     private static final String HEADER = "header";
     private static final String DESCRIPTION = "description";
