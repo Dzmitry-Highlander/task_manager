@@ -34,7 +34,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public boolean signExecutor() {
-        return false;
+    public boolean signExecutor(int executorID) {
+        return taskDao.signExecutor(executorID);
     }
 }

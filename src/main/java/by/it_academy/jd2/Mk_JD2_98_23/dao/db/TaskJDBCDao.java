@@ -68,4 +68,10 @@ public class TaskJDBCDao implements ITaskDao {
 
         return item;
     }
+
+    @Override
+    public boolean signExecutor(int executorID) {
+
+        return false;
+    }
 }
