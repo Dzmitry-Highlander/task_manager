@@ -1,5 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.TaskServiceFactory;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 @WebServlet("/api/create")
 public class TaskCreateServlet extends HttpServlet {
@@ -37,6 +39,15 @@ public class TaskCreateServlet extends HttpServlet {
         String deadline = req.getParameter(DEADLINE);
         String status = req.getParameter(STATUS);
         String executor = req.getParameter(EXECUTOR);
+
+        if (true) {
+            LocalDateTime deadlineParsed = LocalDateTime.parse(deadline);
+            int statusParsed = Integer.parseInt(status);
+
+            TaskCreateDTO dto = new TaskCreateDTO(header, description, deadlineParsed, statusParsed);
+
+            taskService.save(dto);
+        }
 
         writer.write(objectMapper.writeValueAsString(taskService.get()));
     }
