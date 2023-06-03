@@ -15,4 +15,46 @@ public class TaskDTO {
     private String description;
     private LocalDateTime deadline;
     private Status status;
+
+    public TaskDTO() {
+    }
+
+    public TaskDTO(String header, String description, LocalDateTime deadline, Status status) {
+        this.header = header;
+        this.description = description;
+        this.deadline = deadline;
+        this.status = status;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
