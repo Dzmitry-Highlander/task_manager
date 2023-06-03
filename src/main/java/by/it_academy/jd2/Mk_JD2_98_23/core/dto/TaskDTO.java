@@ -1,14 +1,8 @@
 package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 
-import java.time.LocalDateTime;
+import by.it_academy.jd2.Mk_JD2_98_23.core.enums.Status;
 
-enum Status {
-    UNASSIGNED,
-    PENDING,
-    ACCEPTED,
-    STARTED,
-    COMPLETED
-}
+import java.time.LocalDateTime;
 
 public class TaskDTO {
     private String header;
