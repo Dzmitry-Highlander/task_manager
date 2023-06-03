@@ -7,7 +7,7 @@ public enum Status {
         STARTED ("started"),
         COMPLETED ("completed");
 
-        private String title;
+        private final String title;
 
         Status(String title) {
                 this.title = title;
