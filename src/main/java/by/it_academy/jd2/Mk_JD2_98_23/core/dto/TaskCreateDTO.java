@@ -24,7 +24,7 @@ public class TaskCreateDTO {
         this.description = description;
         this.deadline = deadline;
         this.status = status;
-        this.executorID = 0;
+        this.executorID = 1;
     }
 
     public String getHeader() {
