@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @WebServlet("/api/create")
 public class TaskCreateServlet extends HttpServlet {
@@ -48,8 +47,7 @@ public class TaskCreateServlet extends HttpServlet {
             TaskCreateDTO dto = new TaskCreateDTO(header, description, deadlineParsed, statusParsed);
 
             taskService.save(dto);
+            writer.write(objectMapper.writeValueAsString(dto));
         }
-
-        writer.write(objectMapper.writeValueAsString(taskService.get()));
     }
 }
