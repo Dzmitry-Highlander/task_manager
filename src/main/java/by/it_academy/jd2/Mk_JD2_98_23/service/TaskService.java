@@ -6,10 +6,10 @@ import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskCreateService;
 
 import java.util.List;
 
-public class TaskCreateService implements ITaskCreateService {
+public class TaskService implements ITaskCreateService {
     private final ITaskDao taskDao;
 
-    public TaskCreateService(ITaskDao taskDao) {
+    public TaskService(ITaskDao taskDao) {
         this.taskDao = taskDao;
     }
 
