@@ -15,7 +15,7 @@ public class TaskCreateService implements ITaskCreateService {
 
     @Override
     public List<TaskCreateDTO> get() {
-        return null;
+        return taskDao.get();
     }
 
     @Override
