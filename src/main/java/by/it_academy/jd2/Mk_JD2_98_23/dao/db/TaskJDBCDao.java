@@ -52,9 +52,9 @@ public class TaskJDBCDao implements ITaskDao {
             ps.setObject(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
             ps.setObject(4, item.getStatus());
-
-            int rowsInserted = ps.executeUpdate();
             /* TODO добавить класс DataInsertionErrorException
+
+                int rowsInserted = ps.executeUpdate();
 
                 if (rowsInserted == 0) {
                 throw new DataInsertionErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
@@ -70,8 +70,26 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
-    public boolean signExecutor(int executorID) {
+    public boolean signExecutor(int executorID, int taskID) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE app.task SET executor_id = ? " +
+                     "WHERE task_id = ?;")) {
+            ps.setInt(1, executorID);
+            ps.setInt(2, taskID);
+            /* TODO добавить класс DataInsertionErrorException
 
-        return false;
+                int rowsInserted = ps.executeUpdate();
+
+                if (rowsInserted == 0) {
+                throw new DataInsertionErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
+                        "в таблицу.");
+            }
+             */
+
+        } catch (SQLException e) {
+            throw new AccessDataException("Ошибка подключения к базе данных", e);
+        }
+
+        return true;
     }
 }
