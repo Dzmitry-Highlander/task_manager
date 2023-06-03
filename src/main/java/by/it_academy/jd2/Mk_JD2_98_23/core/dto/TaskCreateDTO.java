@@ -12,5 +12,5 @@ public class TaskCreateDTO {
     @JsonProperty("deadline")
     private LocalDateTime deadline;
     @JsonProperty("status")
-    private int status;
+    private String status;
 }

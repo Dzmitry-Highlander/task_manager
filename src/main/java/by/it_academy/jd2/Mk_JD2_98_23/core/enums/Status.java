@@ -1,9 +1,19 @@
 package by.it_academy.jd2.Mk_JD2_98_23.core.enums;
 
 public enum Status {
-        UNASSIGNED,
-        PENDING,
-        ACCEPTED,
-        STARTED,
-        COMPLETED
+        UNASSIGNED ("unassigned"),
+        PENDING ("pending"),
+        ACCEPTED ("accepted"),
+        STARTED ("started"),
+        COMPLETED ("completed");
+
+        private String title;
+
+        Status(String title) {
+                this.title = title;
+        }
+
+        public String getTitle() {
+                return title;
+        }
 }
