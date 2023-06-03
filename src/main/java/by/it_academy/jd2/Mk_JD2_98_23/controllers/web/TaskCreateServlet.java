@@ -15,6 +15,11 @@ import java.io.PrintWriter;
 
 @WebServlet("/api/create")
 public class TaskCreateServlet extends HttpServlet {
+    private static final String HEADER = "header";
+    private static final String DESCRIPTION = "description";
+    private static final String DEADLINE = "deadline";
+    private static final String STATUS  = "status";
+    private static final String EXECUTOR = "executor";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -27,6 +32,11 @@ public class TaskCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
+        String header = req.getParameter(HEADER);
+        String description = req.getParameter(DESCRIPTION);
+        String deadline = req.getParameter(DEADLINE);
+        String status = req.getParameter(STATUS);
+        String executor = req.getParameter(EXECUTOR);
 
         writer.write(objectMapper.writeValueAsString(taskService.get()));
     }

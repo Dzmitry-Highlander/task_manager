@@ -25,7 +25,7 @@ public class TaskService implements ITaskService {
 
     @Override
     public TaskCreateDTO save(TaskCreateDTO item) {
-        return null;
+        return taskDao.save(item);
     }
 
     @Override
