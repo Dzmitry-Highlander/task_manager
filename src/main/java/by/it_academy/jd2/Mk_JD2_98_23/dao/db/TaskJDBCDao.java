@@ -46,8 +46,8 @@ public class TaskJDBCDao implements ITaskDao {
     @Override
     public TaskCreateDTO save(TaskCreateDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task( header, description, " +
-                     "deadline, status) VALUES (?, ?, ?, ?);")) {
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task( header, description, deadline, " +
+                     "status) VALUES (?, ?, ?, ?);")) {
             ps.setObject(1, item.getHeader());
             ps.setObject(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
@@ -66,6 +66,6 @@ public class TaskJDBCDao implements ITaskDao {
             throw new AccessDataException("Ошибка подключения к базе данных", e);
         }
 
-        return null;
+        return item;
     }
 }

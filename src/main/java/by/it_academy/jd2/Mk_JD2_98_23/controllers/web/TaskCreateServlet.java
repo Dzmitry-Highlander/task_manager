@@ -46,8 +46,7 @@ public class TaskCreateServlet extends HttpServlet {
 
             TaskCreateDTO dto = new TaskCreateDTO(header, description, deadlineParsed, statusParsed);
 
-            taskService.save(dto);
-            writer.write(objectMapper.writeValueAsString(dto));
+            writer.write(objectMapper.writeValueAsString(taskService.save(dto)));
         }
     }
 }
