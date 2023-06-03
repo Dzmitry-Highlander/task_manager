@@ -16,5 +16,7 @@ public class TaskServiceFactory {
                 instance = new TaskService(TaskJDBCDaoFactory.getInstance());
             }
         }
+
+        return instance;
     }
 }
