@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @WebServlet("/api/create")
@@ -41,7 +42,7 @@ public class TaskCreateServlet extends HttpServlet {
         String executor = req.getParameter(EXECUTOR);
 
         if (true) {
-            LocalDateTime deadlineParsed = LocalDateTime.parse(deadline);
+            LocalDate deadlineParsed = LocalDate.parse(deadline);
             int statusParsed = Integer.parseInt(status);
 
             TaskCreateDTO dto = new TaskCreateDTO(header, description, deadlineParsed, statusParsed);
