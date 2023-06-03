@@ -16,7 +16,6 @@ public class TaskJDBCDaoFactory {
                     instance = new TaskJDBCDao();
                 }
             }
-
         }
 
         return instance;
