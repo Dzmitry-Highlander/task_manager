@@ -13,8 +13,6 @@ public class TaskCreateDTO {
     private LocalDate deadline;
     @JsonProperty("status")
     private int status;
-    @JsonProperty("executor")
-    private int executorID;
 
     public TaskCreateDTO() {
     }
@@ -24,7 +22,6 @@ public class TaskCreateDTO {
         this.description = description;
         this.deadline = deadline;
         this.status = status;
-        this.executorID = 1;
     }
 
     public String getHeader() {
@@ -57,13 +54,5 @@ public class TaskCreateDTO {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public int getExecutorID() {
-        return executorID;
-    }
-
-    public void setExecutorID(int executorID) {
-        this.executorID = executorID;
     }
 }

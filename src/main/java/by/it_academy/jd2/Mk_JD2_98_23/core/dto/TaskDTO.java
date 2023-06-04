@@ -7,17 +7,15 @@ public class TaskDTO {
     private String description;
     private LocalDate deadline;
     private int status;
-    private int executorID;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(String header, String description, LocalDate deadline, int status, int executorID) {
+    public TaskDTO(String header, String description, LocalDate deadline, int status) {
         this.header = header;
         this.description = description;
         this.deadline = deadline;
         this.status = status;
-        this.executorID = executorID;
     }
 
     public String getHeader() {
@@ -50,13 +48,5 @@ public class TaskDTO {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public int getExecutorID() {
-        return executorID;
-    }
-
-    public void setExecutorID(int executorID) {
-        this.executorID = executorID;
     }
 }

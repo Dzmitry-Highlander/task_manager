@@ -3,7 +3,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
-import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.AccessDataException;
+import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +32,7 @@ public class TaskJDBCDao implements ITaskDao {
                 data.add(dto);
             }
         } catch (SQLException e) {
-            throw new AccessDataException("Ошибка подключения к базе данных", e);
+            throw new DataErrorException("Ошибка подключения к базе данных", e);
         }
 
         return data;
@@ -52,18 +52,15 @@ public class TaskJDBCDao implements ITaskDao {
             ps.setObject(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
             ps.setObject(4, item.getStatus());
-            /* TODO добавить класс DataInsertionErrorException
 
-                int rowsInserted = ps.executeUpdate();
+            int rowsInserted = ps.executeUpdate();
 
-                if (rowsInserted == 0) {
-                throw new DataInsertionErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
                         "в таблицу.");
             }
-             */
-
         } catch (SQLException e) {
-            throw new AccessDataException("Ошибка подключения к базе данных", e);
+            throw new DataErrorException("Ошибка подключения к базе данных", e);
         }
 
         return item;
@@ -76,18 +73,14 @@ public class TaskJDBCDao implements ITaskDao {
                      "WHERE task_id = ?;")) {
             ps.setInt(1, executorID);
             ps.setInt(2, taskID);
-            /* TODO добавить класс DataInsertionErrorException
+            int rowsInserted = ps.executeUpdate();
 
-                int rowsInserted = ps.executeUpdate();
-
-                if (rowsInserted == 0) {
-                throw new DataInsertionErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
                         "в таблицу.");
             }
-             */
-
         } catch (SQLException e) {
-            throw new AccessDataException("Ошибка подключения к базе данных", e);
+            throw new DataErrorException("Ошибка подключения к базе данных", e);
         }
 
         return true;
