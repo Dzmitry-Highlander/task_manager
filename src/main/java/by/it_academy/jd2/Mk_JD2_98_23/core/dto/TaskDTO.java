@@ -1,17 +1,17 @@
 package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TaskDTO {
     private String header;
     private String description;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     private int status;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(String header, String description, LocalDateTime deadline, int status) {
+    public TaskDTO(String header, String description, LocalDate deadline, int status) {
         this.header = header;
         this.description = description;
         this.deadline = deadline;
@@ -34,11 +34,11 @@ public class TaskDTO {
         this.description = description;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

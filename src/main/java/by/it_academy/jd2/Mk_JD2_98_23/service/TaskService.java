@@ -15,7 +15,7 @@ public class TaskService implements ITaskService {
 
     @Override
     public List<TaskCreateDTO> get() {
-        return null;
+        return taskDao.get();
     }
 
     @Override
@@ -25,6 +25,16 @@ public class TaskService implements ITaskService {
 
     @Override
     public TaskCreateDTO save(TaskCreateDTO item) {
-        return null;
+        return taskDao.save(item);
+    }
+
+    @Override
+    public boolean changeStatus(int statusCode) {
+        return false;
+    }
+
+    @Override
+    public void signExecutor(int executorIDParser, int taskIDParser) {
+        taskDao.signExecutor(executorIDParser, taskIDParser);
     }
 }
