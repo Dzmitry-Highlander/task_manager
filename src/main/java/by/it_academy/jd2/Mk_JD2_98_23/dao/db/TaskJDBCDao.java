@@ -40,7 +40,28 @@ public class TaskJDBCDao implements ITaskDao {
 
     @Override
     public TaskCreateDTO get(int id) {
-        return null;
+        TaskCreateDTO dto = null;
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn
+                     .prepareStatement("SELECT task_id, header, description, deadline, status FROM app.task" +
+                             " WHERE task_id = ? ORDER BY task_id ASC")) {
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                dto = new TaskCreateDTO();
+                dto.setHeader(rs.getString("header"));
+                dto.setDescription(rs.getString("description"));
+                dto.setDeadline(rs.getDate("deadline").toLocalDate());
+                dto.setStatus(rs.getInt("status"));
+            }
+        } catch (SQLException e) {
+            throw new DataErrorException("Ошибка подключения к базе данных", e);
+        }
+
+        return dto;
     }
 
     @Override

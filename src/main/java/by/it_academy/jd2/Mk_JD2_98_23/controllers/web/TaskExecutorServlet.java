@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/api/task/assign_executor")
+@WebServlet("/api/task/executor")
 public class TaskExecutorServlet extends HttpServlet {
     private static final String EXECUTOR = "executor_id";
     private static final String TASK = "task_id";
