@@ -31,7 +31,9 @@ public class TaskExecutorServlet extends HttpServlet {
             int executorIDParser = Integer.parseInt(executorID);
             int taskIDParser = Integer.parseInt(taskID);
 
-            taskService.signExecutor(executorIDParser);
+            taskService.signExecutor(executorIDParser, taskIDParser);
+
+            writer.write("Задача назначена");
         }
     }
 }

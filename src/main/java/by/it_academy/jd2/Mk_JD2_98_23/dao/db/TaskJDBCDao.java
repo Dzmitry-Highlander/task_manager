@@ -31,8 +31,8 @@ public class TaskJDBCDao implements ITaskDao {
 
                 data.add(dto);
             }
-        } catch (SQLException e) {
-            throw new DataErrorException("Ошибка подключения к базе данных", e);
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
         }
 
         return data;
@@ -57,8 +57,8 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
                 dto.setStatus(rs.getInt("status"));
             }
-        } catch (SQLException e) {
-            throw new DataErrorException("Ошибка подключения к базе данных", e);
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
         }
 
         return dto;
@@ -67,7 +67,7 @@ public class TaskJDBCDao implements ITaskDao {
     @Override
     public TaskCreateDTO save(TaskCreateDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task( header, description, deadline, " +
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task(header, description, deadline, " +
                      "status) VALUES (?, ?, ?, ?);")) {
             ps.setObject(1, item.getHeader());
             ps.setObject(2, item.getDescription());
@@ -77,33 +77,29 @@ public class TaskJDBCDao implements ITaskDao {
             int rowsInserted = ps.executeUpdate();
 
             if (rowsInserted == 0) {
-                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
-                        "в таблицу.");
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
             }
-        } catch (SQLException e) {
-            throw new DataErrorException("Ошибка подключения к базе данных", e);
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
         }
 
         return item;
     }
 
     @Override
-    public boolean signExecutor(int executorID, int taskID) {
+    public void signExecutor(int executorID, int taskID) {
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("UPDATE app.task SET executor_id = ? " +
-                     "WHERE task_id = ?;")) {
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
+                     "VALUES (?, ?);")) {
             ps.setInt(1, executorID);
             ps.setInt(2, taskID);
             int rowsInserted = ps.executeUpdate();
 
             if (rowsInserted == 0) {
-                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена " +
-                        "в таблицу.");
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена в таблицу.");
             }
-        } catch (SQLException e) {
-            throw new DataErrorException("Ошибка подключения к базе данных", e);
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
         }
-
-        return true;
     }
 }
