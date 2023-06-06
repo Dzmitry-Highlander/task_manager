@@ -1,7 +1,9 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
+import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.TaskServiceFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,27 +15,22 @@ import java.io.PrintWriter;
 
 @WebServlet("/api/task/executor")
 public class TaskExecutorServlet extends HttpServlet {
-    private static final String EXECUTOR = "executor_id";
-    private static final String TASK = "task_id";
     private final ITaskService taskService;
+    private final ObjectMapper objectMapper;
 
     public TaskExecutorServlet() {
         this.taskService = TaskServiceFactory.getInstance();
+        this.objectMapper = ObjectMapperFactory.getInstance();
+        this.objectMapper.findAndRegisterModules();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+
         PrintWriter writer = resp.getWriter();
-        String executorID = req.getParameter(EXECUTOR);
-        String taskID = req.getParameter(TASK);
 
-        if (true) {
-            int executorIDParser = Integer.parseInt(executorID);
-            int taskIDParser = Integer.parseInt(taskID);
-
-            taskService.signExecutor(executorIDParser, taskIDParser);
-
-            writer.write("Задача назначена");
-        }
+        //TODO передать Executor.class
+        //taskService.signExecutor();
     }
 }

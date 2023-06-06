@@ -29,8 +29,8 @@ public class TaskCreateServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        PrintWriter writer = resp.getWriter();
 
+        PrintWriter writer = resp.getWriter();
         TaskCreateDTO dto = objectMapper.readValue(req.getInputStream(), TaskCreateDTO.class);
 
         taskService.save(dto);
