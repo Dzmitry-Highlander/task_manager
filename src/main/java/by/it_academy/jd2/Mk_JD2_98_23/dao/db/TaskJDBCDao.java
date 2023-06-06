@@ -84,21 +84,4 @@ public class TaskJDBCDao implements ITaskDao {
 
         return item;
     }
-
-    @Override
-    public void signExecutor(int executorID, int taskID) {
-        try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
-                     "VALUES (?, ?);")) {
-            ps.setInt(1, executorID);
-            ps.setInt(2, taskID);
-            int rowsInserted = ps.executeUpdate();
-
-            if (rowsInserted == 0) {
-                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена в таблицу.");
-            }
-        } catch (Exception e) {
-            throw new DataErrorException(e.getMessage(), e);
-        }
-    }
 }

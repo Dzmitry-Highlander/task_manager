@@ -2,6 +2,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.service;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorService;
 
@@ -25,12 +26,12 @@ public class ExecutorService implements IExecutorService {
     }
 
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO item) {
+    public ExecutorCreateDTO save(ExecutorCreateDTO executorCreateDTO) {
         return null;
     }
 
     @Override
-    public void signExecutor(ExecutorDTO item) {
-        executorDao.signExecutor(item);
+    public void signExecutor(ExecutorDTO executorDTO, TaskDTO taskDTO) {
+        executorDao.signExecutor(executorDTO, taskDTO);
     }
 }
