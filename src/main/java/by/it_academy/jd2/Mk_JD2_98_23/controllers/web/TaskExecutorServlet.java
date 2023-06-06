@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 @WebServlet("/api/task/executor")
@@ -30,8 +32,23 @@ public class TaskExecutorServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         PrintWriter writer = resp.getWriter();
-        ExecutorDTO executorDTO = objectMapper.readValue(req.getInputStream(), ExecutorDTO.class);
-        TaskDTO taskDTO = objectMapper.readValue(req.getInputStream(), TaskDTO.class);
+        InputStream stream = req.getInputStream();
+        String string = "";
+
+        try (stream) {
+            char[] tmp = new char[4096];
+            StringBuilder sb = new StringBuilder(Math.max(16, stream.available()));
+            InputStreamReader reader = new InputStreamReader(stream);
+
+            for (int cnt; (cnt = reader.read(tmp)) > 0;) {
+                sb.append(tmp, 0, cnt);
+            }
+
+            string = sb.toString();
+        }
+
+        ExecutorDTO executorDTO = objectMapper.readValue(string, ExecutorDTO.class);
+        TaskDTO taskDTO = objectMapper.readValue(string, TaskDTO.class);
 
         executorService.signExecutor(executorDTO, taskDTO);
         writer.write("Исполнитель добавлен");
