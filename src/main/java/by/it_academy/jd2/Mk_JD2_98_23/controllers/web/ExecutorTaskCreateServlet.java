@@ -1,7 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorTaskService;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ExecutorServiceFactory;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
@@ -16,11 +15,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/api/executor_task/create")
-public class ExecutorTaskServlet extends HttpServlet {
+public class ExecutorTaskCreateServlet extends HttpServlet {
     private final IExecutorTaskService executorTaskService ;
     private final ObjectMapper objectMapper;
 
-    public ExecutorTaskServlet() {
+    public ExecutorTaskCreateServlet() {
         this.executorTaskService = ExecutorServiceFactory.getInstance();
         this.objectMapper = ObjectMapperFactory.getInstance();
         this.objectMapper.findAndRegisterModules();
