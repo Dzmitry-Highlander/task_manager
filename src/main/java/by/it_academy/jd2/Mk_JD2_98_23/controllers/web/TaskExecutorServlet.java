@@ -1,6 +1,5 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorService;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,5 +27,6 @@ public class TaskExecutorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
 
+        PrintWriter writer = resp.getWriter();
     }
 }
