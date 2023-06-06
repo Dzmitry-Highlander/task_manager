@@ -3,7 +3,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExecutorDTO {
-    @JsonProperty("executor_)id")
+    @JsonProperty("executor_id")
     private Long id;
     @JsonProperty("name")
     private String name;
