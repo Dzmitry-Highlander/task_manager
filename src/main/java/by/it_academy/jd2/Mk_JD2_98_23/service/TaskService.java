@@ -20,7 +20,7 @@ public class TaskService implements ITaskService {
 
     @Override
     public TaskCreateDTO get(int id) {
-        return null;
+        return taskDao.get(id);
     }
 
     @Override
