@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/api/task/executor")
+@WebServlet("/api/executor/add_task")
 public class TaskExecutorServlet extends HttpServlet {
     private final IExecutorService executorService;
     private final ObjectMapper objectMapper;
