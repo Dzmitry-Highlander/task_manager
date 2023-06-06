@@ -26,7 +26,7 @@ public class ExecutorTaskTaskService implements IExecutorTaskService {
 
     @Override
     public ExecutorCreateDTO save(ExecutorCreateDTO executorCreateDTO) {
-        return null;
+        return executorTaskDao.save(executorCreateDTO);
     }
 
     @Override
