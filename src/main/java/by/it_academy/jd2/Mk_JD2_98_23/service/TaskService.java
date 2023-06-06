@@ -32,9 +32,4 @@ public class TaskService implements ITaskService {
     public boolean changeStatus(int statusCode) {
         return false;
     }
-
-    @Override
-    public void signExecutor(int executorIDParser, int taskIDParser) {
-        taskDao.signExecutor(executorIDParser, taskIDParser);
-    }
 }

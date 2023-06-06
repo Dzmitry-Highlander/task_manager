@@ -1,8 +1,8 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
-import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorService;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
-import by.it_academy.jd2.Mk_JD2_98_23.service.factory.TaskServiceFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,11 +15,11 @@ import java.io.PrintWriter;
 
 @WebServlet("/api/task/executor")
 public class TaskExecutorServlet extends HttpServlet {
-    private final ITaskService taskService;
+    private final IExecutorService executorService;
     private final ObjectMapper objectMapper;
 
-    public TaskExecutorServlet() {
-        this.taskService = TaskServiceFactory.getInstance();
+    public TaskExecutorServlet(IExecutorService executorService) {
+        this.executorService = executorService;
         this.objectMapper = ObjectMapperFactory.getInstance();
         this.objectMapper.findAndRegisterModules();
     }
@@ -29,8 +29,9 @@ public class TaskExecutorServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         PrintWriter writer = resp.getWriter();
+        ExecutorDTO dto = objectMapper.readValue(req.getInputStream(), ExecutorDTO.class);
 
-        //TODO передать Executor.class
-        //taskService.signExecutor();
+        executorService.signExecutor(dto);
+        writer.write("Исполнитель добавлен");
     }
 }
