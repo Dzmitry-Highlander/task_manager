@@ -29,7 +29,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public boolean changeStatus(int statusCode) {
-        return false;
+    public boolean update(int statusCode) {
+        return taskDao.update(statusCode);
     }
 }

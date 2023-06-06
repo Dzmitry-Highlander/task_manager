@@ -84,4 +84,9 @@ public class TaskJDBCDao implements ITaskDao {
 
         return item;
     }
+
+    @Override
+    public boolean update(int statusCode) {
+        return false;
+    }
 }
