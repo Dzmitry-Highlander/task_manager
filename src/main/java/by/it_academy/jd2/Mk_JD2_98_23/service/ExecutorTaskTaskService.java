@@ -21,7 +21,7 @@ public class ExecutorTaskTaskService implements IExecutorTaskService {
 
     @Override
     public ExecutorCreateDTO get(int id) {
-        return null;
+        return executorTaskDao.get(id);
     }
 
     @Override
