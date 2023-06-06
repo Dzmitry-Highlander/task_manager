@@ -13,10 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 
 @WebServlet("/api/task/create")
-public class TaskCreateServlet extends HttpServlet implements Serializable {
+public class TaskCreateServlet extends HttpServlet {
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 

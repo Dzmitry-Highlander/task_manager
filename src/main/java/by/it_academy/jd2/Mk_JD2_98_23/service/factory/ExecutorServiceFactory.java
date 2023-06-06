@@ -1,19 +1,19 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service.factory;
 
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.factory.ExecutorJDBCDaoFactory;
-import by.it_academy.jd2.Mk_JD2_98_23.service.ExecutorService;
-import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorService;
+import by.it_academy.jd2.Mk_JD2_98_23.service.ExecutorTaskTaskService;
+import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorTaskService;
 
 public class ExecutorServiceFactory {
-    private static volatile IExecutorService instance;
+    private static volatile IExecutorTaskService instance;
 
     private ExecutorServiceFactory() {
     }
 
-    public static IExecutorService getInstance() {
+    public static IExecutorTaskService getInstance() {
         if (instance == null) {
             synchronized (ExecutorServiceFactory.class) {
-                instance = new ExecutorService(ExecutorJDBCDaoFactory.getInstance());
+                instance = new ExecutorTaskTaskService(ExecutorJDBCDaoFactory.getInstance());
             }
         }
 

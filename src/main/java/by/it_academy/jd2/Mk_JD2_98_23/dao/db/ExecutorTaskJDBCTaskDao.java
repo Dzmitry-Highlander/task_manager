@@ -1,7 +1,9 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorDao;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 
@@ -9,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-public class ExecutorJDBCDao implements IExecutorDao {
+public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     @Override
     public List<ExecutorCreateDTO> get() {
         return null;
@@ -26,12 +28,12 @@ public class ExecutorJDBCDao implements IExecutorDao {
     }
 
     @Override
-    public void signExecutor(long executorID, long taskID) {
+    public void save(ExecutorTaskCreateDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
                      "VALUES (?, ?);")) {
-            ps.setLong(1, executorID);
-            ps.setLong(2, taskID);
+            ps.setLong(1, item.getExecutorID());
+            ps.setLong(2, item.getTaskID());
             int rowsInserted = ps.executeUpdate();
 
             if (rowsInserted == 0) {
