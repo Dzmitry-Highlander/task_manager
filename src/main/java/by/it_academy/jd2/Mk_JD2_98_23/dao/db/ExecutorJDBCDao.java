@@ -28,12 +28,12 @@ public class ExecutorJDBCDao implements IExecutorDao {
     }
 
     @Override
-    public void signExecutor(ExecutorDTO executorDTO, TaskDTO taskDTO) {
+    public void signExecutor(long executorID, long taskID) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
                      "VALUES (?, ?);")) {
-            ps.setLong(1, executorDTO.getId());
-            ps.setLong(2, taskDTO.getId());
+            ps.setLong(1, executorID);
+            ps.setLong(2, taskID);
             int rowsInserted = ps.executeUpdate();
 
             if (rowsInserted == 0) {
