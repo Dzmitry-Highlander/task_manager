@@ -36,7 +36,7 @@ public class AllTaskService extends HttpServlet {
         List<TaskDTO> dtos;
 
         if (true) {
-            Integer sortLong = Integer.getInteger(sort);
+            int sortLong = Integer.parseInt(sort);
 
             dtos = taskService.getSorted(sortLong);
         }
