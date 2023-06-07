@@ -94,7 +94,8 @@ public class TaskJDBCDao implements ITaskDao {
 
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
-                     "(SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status " +
+                     "(SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status, " +
+                     "(SELECT status_id FROM app.status WHERE task.status_id = status.status_id) AS status_id " +
                      "FROM app.task ORDER BY ?;")) {
             ps.setString(1, sort.getSort());
 
@@ -106,7 +107,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                dto.setStatus(new StatusDTO(1L, rs.getString("status")));
+                dto.setStatus(new StatusDTO(rs.getLong("status_id"), rs.getString("status")));
 
                 data.add(dto);
             }
