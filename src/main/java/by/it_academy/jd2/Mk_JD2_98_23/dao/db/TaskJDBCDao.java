@@ -19,8 +19,8 @@ public class TaskJDBCDao implements ITaskDao {
         List<TaskDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, status " +
-                     "FROM app.task ORDER BY task_id ASC;")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
+                     "status_id FROM app.task ORDER BY task_id ASC;")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -70,7 +70,7 @@ public class TaskJDBCDao implements ITaskDao {
     public TaskDTO save(TaskDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task(header, description, deadline, " +
-                     "status) VALUES (?, ?, ?, ?);")) {
+                     "status_id) VALUES (?, ?, ?, ?);")) {
             ps.setString(1, item.getHeader());
             ps.setString(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
@@ -93,8 +93,8 @@ public class TaskJDBCDao implements ITaskDao {
         List<TaskDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, status " +
-                     "FROM app.task ORDER BY ?;")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
+                     "status_id FROM app.task ORDER BY ?;")) {
             ps.setString(1, sort.getSort());
 
             ResultSet rs = ps.executeQuery();
