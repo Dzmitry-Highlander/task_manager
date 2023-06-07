@@ -24,6 +24,7 @@ public class TaskJDBCDao implements ITaskDao {
 
             while (rs.next()) {
                 TaskDTO dto = new TaskDTO();
+                dto.setId(rs.getLong("task_id"));
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
