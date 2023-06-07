@@ -36,9 +36,9 @@ public class AllTaskService extends HttpServlet {
         PrintWriter writer = resp.getWriter();
 
         if (objectMapper.canSerialize(Sort.class)) {
-            Sort sort = objectMapper.readValue(req.getInputStream(), Sort.class);
+            Integer sort = objectMapper.readValue(req.getInputStream(), Integer.class);
 
-            dtos = taskService.get(sort);
+            dtos = taskService.getSorted(sort);
         } else {
             dtos = taskService.get();
         }
