@@ -94,7 +94,7 @@ public class TaskJDBCDao implements ITaskDao {
 
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
-                     "(SELECT status FROM app.status WHERE status_id = 1) AS status FROM app.task; ORDER BY ?;")) {
+                     "(SELECT status FROM app.status WHERE status_id = ?) AS status FROM app.task; ORDER BY ?;")) {
             ps.setString(1, sort.getSort());
 
             ResultSet rs = ps.executeQuery();
