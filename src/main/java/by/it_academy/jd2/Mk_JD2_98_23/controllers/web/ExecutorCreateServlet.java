@@ -1,9 +1,9 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorService;
+import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ExecutorServiceFactory;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
-import by.it_academy.jd2.Mk_JD2_98_23.service.factory.TaskServiceFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,13 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/api/task/create")
-public class TaskCreateServlet extends HttpServlet {
-    private final ITaskService taskService;
+@WebServlet("/api/executor/create")
+public class ExecutorCreateServlet extends HttpServlet {
+    private final IExecutorService executorService;
     private final ObjectMapper objectMapper;
 
-    public TaskCreateServlet() {
-        this.taskService = TaskServiceFactory.getInstance();
+    public ExecutorCreateServlet() {
+        this.executorService = ExecutorServiceFactory.getInstance();
         this.objectMapper = ObjectMapperFactory.getInstance();
         this.objectMapper.findAndRegisterModules();
     }
@@ -30,9 +30,9 @@ public class TaskCreateServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         PrintWriter writer = resp.getWriter();
-        TaskCreateDTO dto = objectMapper.readValue(req.getInputStream(), TaskCreateDTO.class);
+        ExecutorCreateDTO dto = objectMapper.readValue(req.getInputStream(), ExecutorCreateDTO.class);
 
-        taskService.save(dto);
+        executorService.save(dto);
         writer.write(objectMapper.writeValueAsString(dto));
     }
 }

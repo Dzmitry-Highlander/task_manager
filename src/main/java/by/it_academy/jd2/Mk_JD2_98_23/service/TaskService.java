@@ -1,6 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
 
@@ -14,13 +15,13 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public List<TaskCreateDTO> get() {
+    public List<TaskDTO> get() {
         return taskDao.get();
     }
 
     @Override
     public TaskCreateDTO get(int id) {
-        return null;
+        return taskDao.get(id);
     }
 
     @Override
@@ -29,12 +30,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public boolean changeStatus(int statusCode) {
-        return false;
-    }
-
-    @Override
-    public void signExecutor(int executorIDParser, int taskIDParser) {
-        taskDao.signExecutor(executorIDParser, taskIDParser);
+    public boolean update(int statusCode) {
+        return taskDao.update(statusCode);
     }
 }

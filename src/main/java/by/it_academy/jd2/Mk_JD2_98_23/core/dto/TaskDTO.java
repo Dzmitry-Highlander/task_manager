@@ -3,6 +3,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 import java.time.LocalDate;
 
 public class TaskDTO {
+    private long id;
     private String header;
     private String description;
     private LocalDate deadline;
@@ -11,11 +12,20 @@ public class TaskDTO {
     public TaskDTO() {
     }
 
-    public TaskDTO(String header, String description, LocalDate deadline, String status) {
+    public TaskDTO(long id, String header, String description, LocalDate deadline, String status) {
+        this.id = id;
         this.header = header;
         this.description = description;
         this.deadline = deadline;
         this.status = status;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getHeader() {
