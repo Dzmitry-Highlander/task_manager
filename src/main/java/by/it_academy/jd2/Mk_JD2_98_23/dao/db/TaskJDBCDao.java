@@ -1,7 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
+import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskJDBCDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskJDBCDao implements ITaskDao {
+public class TaskJDBCDao implements ITaskJDBCDao {
     @Override
     public List<TaskCreateDTO> get() {
         List<TaskCreateDTO> data = new ArrayList<>();
