@@ -10,7 +10,7 @@ public enum Sort {
     STATUS_ASC ("status ASC"),
     STATUS_DESC ("status DESC");
 
-    private String sort;
+    private final String sort;
 
     Sort(String sort) {
         this.sort = sort;
