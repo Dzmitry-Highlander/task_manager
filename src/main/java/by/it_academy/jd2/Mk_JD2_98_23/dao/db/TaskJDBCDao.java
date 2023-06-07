@@ -1,7 +1,8 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskJDBCDao;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 
@@ -11,10 +12,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskJDBCDao implements ITaskJDBCDao {
+public class TaskJDBCDao implements ITaskDao {
     @Override
-    public List<TaskCreateDTO> get() {
-        List<TaskCreateDTO> data = new ArrayList<>();
+    public List<TaskDTO> get() {
+        List<TaskDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, status " +
@@ -22,11 +23,11 @@ public class TaskJDBCDao implements ITaskJDBCDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                TaskCreateDTO dto = new TaskCreateDTO();
+                TaskDTO dto = new TaskDTO();
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                dto.setStatus(rs.getInt("status"));
+                dto.setStatus(rs.getString("status"));
 
                 data.add(dto);
             }
