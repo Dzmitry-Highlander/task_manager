@@ -74,7 +74,7 @@ public class TaskJDBCDao implements ITaskDao {
             ps.setString(1, item.getHeader());
             ps.setString(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
-            ps.setObject(4, item.getStatus());
+            ps.setLong(4, item.getStatus().getId());
 
             int rowsInserted = ps.executeUpdate();
 
