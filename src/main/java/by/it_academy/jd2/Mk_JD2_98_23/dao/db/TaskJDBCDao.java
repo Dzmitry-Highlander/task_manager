@@ -5,6 +5,7 @@ import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
+import by.it_academy.jd2.Mk_JD2_98_23.service.enums.Sort;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,6 +86,34 @@ public class TaskJDBCDao implements ITaskDao {
         }
 
         return item;
+    }
+
+    @Override
+    public List<TaskDTO> get(Sort sort) {
+        List<TaskDTO> data = new ArrayList<>();
+
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, status " +
+                     "FROM app.task ORDER BY ?;")) {
+            ps.setString(1, sort.getSort());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                TaskDTO dto = new TaskDTO();
+                dto.setId(rs.getLong("task_id"));
+                dto.setHeader(rs.getString("header"));
+                dto.setDescription(rs.getString("description"));
+                dto.setDeadline(rs.getDate("deadline").toLocalDate());
+                dto.setStatus(rs.getString("status"));
+
+                data.add(dto);
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return data;
     }
 
     @Override
