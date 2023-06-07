@@ -5,9 +5,9 @@ import java.util.List;
 public interface ICRUDService<T, S> {
     List<S> get();
 
-    T get(int id);
+    S get(int id);
 
-    T save(T item);
+    S save(T item);
 
     //TODO update(), delete()
 }

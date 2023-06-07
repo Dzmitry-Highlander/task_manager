@@ -5,7 +5,7 @@ import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
-import by.it_academy.jd2.Mk_JD2_98_23.service.enums.Sort;
+import by.it_academy.jd2.Mk_JD2_98_23.enums.Sort;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +29,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                dto.setStatus(rs.getString("status"));
+                //TODO dto.setStatus
 
                 data.add(dto);
             }
@@ -41,8 +41,8 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
-    public TaskCreateDTO get(int id) {
-        TaskCreateDTO dto = null;
+    public TaskDTO get(int id) {
+        TaskDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
                      .prepareStatement("SELECT task_id, header, description, deadline, status FROM app.task" +
@@ -53,11 +53,11 @@ public class TaskJDBCDao implements ITaskDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                dto = new TaskCreateDTO();
+                dto = new TaskDTO();
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                dto.setStatus(rs.getInt("status"));
+                //TODO dto.setStatus
             }
         } catch (Exception e) {
             throw new DataErrorException(e.getMessage(), e);
@@ -67,14 +67,14 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
-    public TaskCreateDTO save(TaskCreateDTO item) {
+    public TaskDTO save(TaskDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task(header, description, deadline, " +
                      "status) VALUES (?, ?, ?, ?);")) {
             ps.setString(1, item.getHeader());
             ps.setString(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
-            ps.setInt(4, item.getStatus());
+            //TODO dto.setStatus
 
             int rowsInserted = ps.executeUpdate();
 
@@ -105,7 +105,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                dto.setStatus(rs.getString("status"));
+                //TODO dto.setStatus
 
                 data.add(dto);
             }

@@ -4,7 +4,7 @@ import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
-import by.it_academy.jd2.Mk_JD2_98_23.service.enums.Sort;
+import by.it_academy.jd2.Mk_JD2_98_23.enums.Sort;
 
 import java.util.List;
 
@@ -21,13 +21,20 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public TaskCreateDTO get(int id) {
+    public TaskDTO get(int id) {
         return taskDao.get(id);
     }
 
     @Override
-    public TaskCreateDTO save(TaskCreateDTO item) {
-        return taskDao.save(item);
+    public TaskDTO save(TaskCreateDTO item) {
+        TaskDTO dto = new TaskDTO();
+
+        dto.setHeader(item.getHeader());
+        dto.setDescription(item.getDescription());
+        dto.setDeadline(item.getDeadline());
+        //TODO dto.setStatus - через StatusJDBCDao
+
+        return null;
     }
 
     @Override
