@@ -31,6 +31,7 @@ public class StatusJDBCDao implements IStatusDao {
 
             if (rs.next()) {
                 dto = new StatusDTO();
+                dto.setId(rs.getLong("status_id"));
                 dto.setStatus(rs.getString("status"));
             }
         } catch (Exception e) {
