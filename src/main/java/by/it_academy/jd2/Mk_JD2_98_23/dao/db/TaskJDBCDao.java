@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.StatusDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
@@ -29,7 +29,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                //TODO dto.setStatus
+                dto.setStatus(rs.getObject(2, StatusDTO.class));
 
                 data.add(dto);
             }
@@ -45,7 +45,7 @@ public class TaskJDBCDao implements ITaskDao {
         TaskDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
-                     .prepareStatement("SELECT task_id, header, description, deadline, status FROM app.task" +
+                     .prepareStatement("SELECT task_id, header, description, deadline, status_id FROM app.task" +
                              " WHERE task_id = ? ORDER BY task_id ASC")) {
 
             ps.setInt(1, id);
@@ -57,7 +57,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                //TODO dto.setStatus
+                dto.setStatus(rs.getObject(2, StatusDTO.class));
             }
         } catch (Exception e) {
             throw new DataErrorException(e.getMessage(), e);
@@ -74,7 +74,7 @@ public class TaskJDBCDao implements ITaskDao {
             ps.setString(1, item.getHeader());
             ps.setString(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
-            //TODO dto.setStatus
+            ps.setObject(4, item.getStatus());
 
             int rowsInserted = ps.executeUpdate();
 
@@ -105,7 +105,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                //TODO dto.setStatus
+                dto.setStatus(rs.getObject(2, StatusDTO.class));
 
                 data.add(dto);
             }

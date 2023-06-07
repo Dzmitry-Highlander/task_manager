@@ -11,13 +11,13 @@ public class TaskCreateDTO {
     private String description;
     @JsonProperty("deadline")
     private LocalDate deadline;
-    @JsonProperty("status")
-    private int status;
+    @JsonProperty("status_id")
+    private Long status;
 
     public TaskCreateDTO() {
     }
 
-    public TaskCreateDTO(String header, String description, LocalDate deadline, int status) {
+    public TaskCreateDTO(String header, String description, LocalDate deadline, Long status) {
         this.header = header;
         this.description = description;
         this.deadline = deadline;
@@ -48,11 +48,11 @@ public class TaskCreateDTO {
         this.deadline = deadline;
     }
 
-    public int getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 }

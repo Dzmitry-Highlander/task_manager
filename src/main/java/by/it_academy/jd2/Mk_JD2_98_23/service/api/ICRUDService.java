@@ -5,7 +5,7 @@ import java.util.List;
 public interface ICRUDService<T, S> {
     List<S> get();
 
-    S get(int id);
+    S get(Long id);
 
     S save(T item);
 

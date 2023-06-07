@@ -2,6 +2,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.service;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IStatusDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
 import by.it_academy.jd2.Mk_JD2_98_23.enums.Sort;
@@ -10,9 +11,11 @@ import java.util.List;
 
 public class TaskService implements ITaskService {
     private final ITaskDao taskDao;
+    private final IStatusDao statusDao;
 
-    public TaskService(ITaskDao taskDao) {
+    public TaskService(ITaskDao taskDao, IStatusDao statusDao) {
         this.taskDao = taskDao;
+        this.statusDao = statusDao;
     }
 
     @Override
@@ -21,7 +24,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public TaskDTO get(int id) {
+    public TaskDTO get(Long id) {
         return taskDao.get(id);
     }
 
@@ -32,9 +35,9 @@ public class TaskService implements ITaskService {
         dto.setHeader(item.getHeader());
         dto.setDescription(item.getDescription());
         dto.setDeadline(item.getDeadline());
-        //TODO dto.setStatus - через StatusJDBCDao
+        dto.setStatus(statusDao.get(item.getStatus()));
 
-        return null;
+        return taskDao.save(dto);
     }
 
     @Override

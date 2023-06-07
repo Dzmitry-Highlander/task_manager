@@ -1,12 +1,19 @@
 package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class TaskDTO {
+    @JsonProperty("task_id")
     private Long id;
+    @JsonProperty("header")
     private String header;
+    @JsonProperty("description")
     private String description;
+    @JsonProperty("deadline")
     private LocalDate deadline;
+    @JsonProperty("status")
     private StatusDTO status;
 
     public TaskDTO() {

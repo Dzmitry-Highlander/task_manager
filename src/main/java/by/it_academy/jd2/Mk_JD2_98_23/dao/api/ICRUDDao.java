@@ -5,7 +5,7 @@ import java.util.List;
 public interface ICRUDDao<T> {
     List<T> get();
 
-    T get(int id);
+    T get(Long id);
 
     T save(T item);
 

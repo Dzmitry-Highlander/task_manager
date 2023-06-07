@@ -13,7 +13,7 @@ public class TaskServiceFactory {
     public static ITaskService getInstance() {
         if (instance == null) {
             synchronized (TaskServiceFactory.class) {
-                instance = new TaskService(TaskJDBCDaoFactory.getInstance());
+                instance = new TaskService(TaskJDBCDaoFactory.getInstance(), statusDao);
             }
         }
 
