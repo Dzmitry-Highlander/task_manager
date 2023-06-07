@@ -18,14 +18,14 @@ public class StatusJDBCDao implements IStatusDao {
     }
 
     @Override
-    public StatusDTO get(int id) {
+    public StatusDTO get(Long id) {
         StatusDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
                      .prepareStatement("SELECT status_id, status FROM app.status" +
                              " WHERE status_id = ? ORDER BY status_id ASC")) {
 
-            ps.setInt(1, id);
+            ps.setLong(1, id);
 
             ResultSet rs = ps.executeQuery();
 

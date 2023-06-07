@@ -41,14 +41,14 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
-    public TaskDTO get(int id) {
+    public TaskDTO get(Long id) {
         TaskDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
                      .prepareStatement("SELECT task_id, header, description, deadline, status_id FROM app.task" +
                              " WHERE task_id = ? ORDER BY task_id ASC")) {
 
-            ps.setInt(1, id);
+            ps.setLong(1, id);
 
             ResultSet rs = ps.executeQuery();
 

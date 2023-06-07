@@ -20,13 +20,13 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
 
     //TODO ExecutorCreateDTO get(int id)
     @Override
-    public ExecutorCreateDTO get(int id) {
+    public ExecutorDTO get(Long id) {
         return null;
     }
 
     //TODO save(ExecutorCreateDTO item);
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO item) {
+    public ExecutorDTO save(ExecutorDTO item) {
         return null;
     }
 

@@ -1,6 +1,5 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
@@ -37,14 +36,14 @@ public class ExecutorJDBCDao implements IExecutorDao {
         return data;
     }
 
-    //TODO ExecutorCreateDTO get(int id)
+    //TODO ExecutorCreateDTO get(Long id)
     @Override
-    public ExecutorCreateDTO get(int id) {
+    public ExecutorDTO get(Long id) {
         return null;
     }
 
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO item) {
+    public ExecutorDTO save(ExecutorDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor(name) VALUES (?);")) {
             ps.setString(1, item.getName());
