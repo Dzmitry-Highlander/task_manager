@@ -8,4 +8,6 @@ public interface ICRUDService<T, S> {
     T get(int id);
 
     T save(T item);
+
+    //TODO update(), delete()
 }

@@ -12,16 +12,19 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
+    //TODO List<ExecutorDTO> get()
     @Override
     public List<ExecutorDTO> get() {
         return null;
     }
 
+    //TODO ExecutorCreateDTO get(int id)
     @Override
     public ExecutorCreateDTO get(int id) {
         return null;
     }
 
+    //TODO save(ExecutorCreateDTO item);
     @Override
     public ExecutorCreateDTO save(ExecutorCreateDTO item) {
         return null;
