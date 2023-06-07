@@ -17,7 +17,7 @@ import java.util.List;
 
 @WebServlet("/api/task/all")
 public class AllTaskService extends HttpServlet {
-    private final String SORT = "sort";
+    private static final String SORT = "sort";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -35,5 +35,12 @@ public class AllTaskService extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         List<TaskDTO> dtos;
 
+        if (true) {
+            Integer sortLong = Integer.getInteger(sort);
+
+            dtos = taskService.getSorted(sortLong);
+        }
+
+        writer.write(objectMapper.writeValueAsString(dtos));
     }
 }
