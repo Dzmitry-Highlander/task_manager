@@ -20,12 +20,16 @@ public class ExecutorService implements IExecutorService {
     }
 
     @Override
-    public ExecutorCreateDTO get(int id) {
+    public ExecutorDTO get(Long id) {
         return executorDao.get(id);
     }
 
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO item) {
-        return executorDao.save(item);
+    public ExecutorDTO save(ExecutorCreateDTO item) {
+        ExecutorDTO dto = new ExecutorDTO();
+
+        dto.setName(item.getName());
+
+        return executorDao.save(dto);
     }
 }

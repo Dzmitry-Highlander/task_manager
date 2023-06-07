@@ -21,13 +21,17 @@ public class ExecutorTaskTaskService implements IExecutorTaskService {
     }
 
     @Override
-    public ExecutorCreateDTO get(int id) {
+    public ExecutorDTO get(Long id) {
         return executorTaskDao.get(id);
     }
 
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO executorCreateDTO) {
-        return executorTaskDao.save(executorCreateDTO);
+    public ExecutorDTO save(ExecutorCreateDTO item) {
+        ExecutorDTO dto = new ExecutorDTO();
+
+        dto.setName(item.getName());
+
+        return executorTaskDao.save(dto);
     }
 
     @Override
