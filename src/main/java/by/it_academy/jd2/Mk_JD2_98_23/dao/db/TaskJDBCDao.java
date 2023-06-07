@@ -69,10 +69,10 @@ public class TaskJDBCDao implements ITaskDao {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task(header, description, deadline, " +
                      "status) VALUES (?, ?, ?, ?);")) {
-            ps.setObject(1, item.getHeader());
-            ps.setObject(2, item.getDescription());
+            ps.setString(1, item.getHeader());
+            ps.setString(2, item.getDescription());
             ps.setObject(3, item.getDeadline());
-            ps.setObject(4, item.getStatus());
+            ps.setInt(4, item.getStatus());
 
             int rowsInserted = ps.executeUpdate();
 

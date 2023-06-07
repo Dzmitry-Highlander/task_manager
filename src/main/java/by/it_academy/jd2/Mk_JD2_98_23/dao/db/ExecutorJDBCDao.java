@@ -19,7 +19,7 @@ public class ExecutorJDBCDao implements IExecutorDao {
         List<ExecutorDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT executor_id, name FROM app.task " +
+             PreparedStatement ps = conn.prepareStatement("SELECT executor_id, name FROM app.executor " +
                      "ORDER BY executor_id ASC")) {
             ResultSet rs = ps.executeQuery();
 
@@ -44,6 +44,19 @@ public class ExecutorJDBCDao implements IExecutorDao {
 
     @Override
     public ExecutorCreateDTO save(ExecutorCreateDTO item) {
-        return null;
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor(name) VALUES (?);")) {
+            ps.setString(1, item.getName());
+
+            int rowsInserted = ps.executeUpdate();
+
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return item;
     }
 }
