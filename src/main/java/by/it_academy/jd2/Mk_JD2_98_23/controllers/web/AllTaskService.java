@@ -32,8 +32,8 @@ public class AllTaskService extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
 
-        List<TaskDTO> dtos = new ArrayList<>();
         PrintWriter writer = resp.getWriter();
+        List<TaskDTO> dtos;
 
         if (objectMapper.canSerialize(Sort.class)) {
             Integer sort = objectMapper.readValue(req.getInputStream(), Integer.class);
