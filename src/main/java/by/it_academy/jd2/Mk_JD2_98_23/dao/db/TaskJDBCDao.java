@@ -18,8 +18,10 @@ public class TaskJDBCDao implements ITaskDao {
         List<TaskDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
-                     "status_id FROM app.task ORDER BY task_id ASC;")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, (" +
+                     "SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status, (" +
+                     "SELECT status_id FROM app.status WHERE task.status_id = status.status_id) AS status_id " +
+                     "FROM app.task ORDER BY task_id ASC;")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -28,8 +30,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                //TODO refactor setStatus()
-                dto.setStatus(rs.getObject(2, StatusDTO.class));
+                dto.setStatus(new StatusDTO(rs.getLong("status_id"), rs.getString("status")));
 
                 data.add(dto);
             }
@@ -45,9 +46,10 @@ public class TaskJDBCDao implements ITaskDao {
         TaskDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
-                     .prepareStatement("SELECT task_id, header, description, deadline, status_id FROM app.task" +
-                             " WHERE task_id = ? ORDER BY task_id ASC")) {
-
+                     .prepareStatement("SELECT task_id, header, description, deadline, (" +
+                             "SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status, (" +
+                             "SELECT status_id FROM app.status WHERE task.status_id = status.status_id) AS status_id " +
+                             "WHERE task_id = ? FROM app.task ORDER BY task_id ASC")) {
             ps.setLong(1, id);
 
             ResultSet rs = ps.executeQuery();
@@ -57,8 +59,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
-                //TODO refactor setStatus()
-                dto.setStatus(rs.getObject(2, StatusDTO.class));
+                dto.setStatus(new StatusDTO(rs.getLong("status_id"), rs.getString("status")));
             }
         } catch (Exception e) {
             throw new DataErrorException(e.getMessage(), e);
