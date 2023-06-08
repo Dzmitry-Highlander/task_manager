@@ -11,5 +11,5 @@ public interface ICRUDDao<T> {
 
     T update(T item);
 
-    //TODO update(), delete()
+    //TODO delete()
 }
