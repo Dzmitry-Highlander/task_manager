@@ -62,6 +62,7 @@ public class ExecutorJDBCDao implements IExecutorDao {
 
     @Override
     public ExecutorDTO save(ExecutorDTO item) {
+        //TODO RETURNING ID
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor(name) VALUES (?);")) {
             ps.setString(1, item.getName());
