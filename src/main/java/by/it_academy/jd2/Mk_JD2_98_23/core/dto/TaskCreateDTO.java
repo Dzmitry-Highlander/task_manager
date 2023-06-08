@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 public class TaskCreateDTO {
+    //TODO добавить поле для delete()
     @JsonProperty("header")
     private String header;
     @JsonProperty("description")
