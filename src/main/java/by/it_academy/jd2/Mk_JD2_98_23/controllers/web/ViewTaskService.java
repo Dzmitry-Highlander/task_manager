@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 @WebServlet("/api/task/view")
 public class ViewTaskService extends HttpServlet {
