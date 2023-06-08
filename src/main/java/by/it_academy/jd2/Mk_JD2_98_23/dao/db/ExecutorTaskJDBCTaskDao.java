@@ -60,6 +60,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
 
     @Override
     public ExecutorTaskDTO save(ExecutorTaskDTO item) {
+        //TODO RETURNING ID
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
                      "VALUES (?, ?);")) {

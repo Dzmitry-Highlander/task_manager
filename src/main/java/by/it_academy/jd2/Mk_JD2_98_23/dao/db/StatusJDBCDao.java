@@ -61,6 +61,7 @@ public class StatusJDBCDao implements IStatusDao {
 
     @Override
     public StatusDTO save(StatusDTO item) {
+        //TODO RETURNING ID
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.status(status) VALUES (?);")) {
             ps.setString(1, item.getStatus());

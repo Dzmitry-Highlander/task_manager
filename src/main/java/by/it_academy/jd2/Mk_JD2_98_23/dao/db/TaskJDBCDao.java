@@ -70,6 +70,7 @@ public class TaskJDBCDao implements ITaskDao {
 
     @Override
     public TaskDTO save(TaskDTO item) {
+        //TODO RETURNING ID
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.task(header, description, deadline, " +
                      "status_id) VALUES (?, ?, ?, ?);")) {
