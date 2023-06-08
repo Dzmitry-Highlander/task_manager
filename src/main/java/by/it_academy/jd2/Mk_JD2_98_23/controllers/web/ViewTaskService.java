@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 @WebServlet("/api/task/view")
 public class ViewTaskService extends HttpServlet {
     private static final String SORT = "sort";
+    private static final String FILTER = "filter";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
