@@ -8,13 +8,30 @@ import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
-    //TODO List<ExecutorDTO> get()
     @Override
     public List<ExecutorTaskDTO> get() {
-        return null;
+        List<ExecutorTaskDTO> data = new ArrayList<>();
+
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT executor_id, name FROM app.executor " +
+                     "ORDER BY executor_id ASC")) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ExecutorTaskDTO dto = new ExecutorTaskDTO();
+
+                data.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return data;
     }
 
     @Override
