@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 @WebServlet("/api/task/view")
 public class ViewTaskService extends HttpServlet {
     private static final String SORT = "sort";
+    private static final int SORT_DEFAULT = 1;
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -34,10 +35,12 @@ public class ViewTaskService extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         LinkedHashMap<Long, TaskDTO> dtos = null;
 
-        if (!req.getParameter(SORT).isEmpty()) {
+        if (req.getParameter(SORT) != null) {
             String sort = req.getParameter(SORT);
 
             dtos = taskService.getSorted(Integer.parseInt(sort));
+        } else {
+            dtos = taskService.getSorted(SORT_DEFAULT);
         }
 
         writer.write(objectMapper.writeValueAsString(dtos));
