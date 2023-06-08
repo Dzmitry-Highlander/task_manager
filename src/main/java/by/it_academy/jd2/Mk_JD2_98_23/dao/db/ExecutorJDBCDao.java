@@ -43,7 +43,6 @@ public class ExecutorJDBCDao implements IExecutorDao {
              PreparedStatement ps = conn
                      .prepareStatement("SELECT executor_id, name FROM app.executor WHERE executor_id = ? " +
                              "ORDER BY executor_id ASC")) {
-
             ps.setLong(1, id);
 
             ResultSet rs = ps.executeQuery();
