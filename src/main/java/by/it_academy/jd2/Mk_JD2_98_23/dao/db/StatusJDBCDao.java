@@ -8,13 +8,31 @@ import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StatusJDBCDao implements IStatusDao {
     @Override
     public List<StatusDTO> get() {
-        //TODO List<StatusDTO> get()
-        return null;
+        List<StatusDTO> data = new ArrayList<>();
+
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT status_id, status FROM app.task " +
+                     "ORDER BY status_id ASC;")) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                StatusDTO dto = new StatusDTO();
+                dto.setId(rs.getLong("status_id"));
+                dto.setStatus("status");
+
+                data.add(dto);
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return data;
     }
 
     @Override
@@ -43,7 +61,19 @@ public class StatusJDBCDao implements IStatusDao {
 
     @Override
     public StatusDTO save(StatusDTO item) {
-        //TODO StatusDTO save(StatusDTO item)
-        return null;
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor(name) VALUES (?);")) {
+            ps.setString(1, item.getStatus());
+
+            int rowsInserted = ps.executeUpdate();
+
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return item;
     }
 }
