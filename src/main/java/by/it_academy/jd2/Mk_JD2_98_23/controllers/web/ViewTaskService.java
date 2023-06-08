@@ -14,11 +14,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 @WebServlet("/api/task/view")
 public class ViewTaskService extends HttpServlet {
     private static final String SORT = "sort";
-    private static final String FILTER_HEADER = "filter_header";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
@@ -35,12 +35,13 @@ public class ViewTaskService extends HttpServlet {
         String sort = req.getParameter(SORT);
         PrintWriter writer = resp.getWriter();
         LinkedHashMap<Long, TaskDTO> dtos;
+        int sortInt = 0;
 
-        if (true) {
-            int sortLong = Integer.parseInt(sort);
-
-            dtos = taskService.getSorted(sortLong);
+        if (!Objects.equals(sort, "")) {
+            sortInt = Integer.parseInt(sort);
         }
+
+        dtos = taskService.getSorted(sortInt);
 
         writer.write(objectMapper.writeValueAsString(dtos.values()));
     }
