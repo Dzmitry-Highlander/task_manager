@@ -17,7 +17,7 @@ public class DatabaseConnection implements IDatabaseConnection {
 
     public Connection getConnection() throws SQLException {
         try {
-            cpds.setDriverClass( "org.postgresql.Driver" );
+            cpds.setDriverClass( "org.postgresql.Driver");
         } catch (PropertyVetoException e) {
             throw new RuntimeException(e);
         }
