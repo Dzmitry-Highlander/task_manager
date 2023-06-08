@@ -7,6 +7,7 @@ import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
 import by.it_academy.jd2.Mk_JD2_98_23.enums.Sort;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class TaskService implements ITaskService {
@@ -41,7 +42,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public List<TaskDTO> getSorted(int sort) {
+    public LinkedHashMap<Long, TaskDTO> getSorted(int sort) {
         Sort sortParam = switch (sort) {
             case 1 -> Sort.ID_ASC;
             case -1 -> Sort.ID_DESC;

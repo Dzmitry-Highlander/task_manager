@@ -13,7 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @WebServlet("/api/task/all")
 public class AllTaskService extends HttpServlet {
@@ -33,7 +34,7 @@ public class AllTaskService extends HttpServlet {
 
         String sort = req.getParameter(SORT);
         PrintWriter writer = resp.getWriter();
-        List<TaskDTO> dtos;
+        LinkedHashMap<Long, TaskDTO> dtos;
 
         if (true) {
             int sortLong = Integer.parseInt(sort);
@@ -41,6 +42,14 @@ public class AllTaskService extends HttpServlet {
             dtos = taskService.getSorted(sortLong);
         }
 
-        writer.write(objectMapper.writeValueAsString(dtos));
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<Long, TaskDTO> entry : dtos.entrySet()) {
+            TaskDTO dto = entry.getValue();
+
+            result.append(objectMapper.writeValueAsString(dto));
+        }
+
+        writer.write(String.valueOf(result));
     }
 }

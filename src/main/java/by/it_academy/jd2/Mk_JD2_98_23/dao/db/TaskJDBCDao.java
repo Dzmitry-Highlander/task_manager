@@ -10,8 +10,7 @@ import by.it_academy.jd2.Mk_JD2_98_23.enums.Sort;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TaskJDBCDao implements ITaskDao {
     @Override
@@ -89,8 +88,8 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
-    public List<TaskDTO> get(Sort sort) {
-        List<TaskDTO> data = new ArrayList<>();
+    public LinkedHashMap<Long, TaskDTO> get(Sort sort) {
+        LinkedHashMap<Long, TaskDTO> data = new LinkedHashMap<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
@@ -100,6 +99,7 @@ public class TaskJDBCDao implements ITaskDao {
             ps.setString(1, sort.getSort());
 
             ResultSet rs = ps.executeQuery();
+            Long key = 0L;
 
             while (rs.next()) {
                 TaskDTO dto = new TaskDTO();
@@ -109,7 +109,8 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
                 dto.setStatus(new StatusDTO(rs.getLong("status_id"), rs.getString("status")));
 
-                data.add(dto);
+                data.put(key, dto);
+                key++;
             }
         } catch (Exception e) {
             throw new DataErrorException(e.getMessage(), e);
