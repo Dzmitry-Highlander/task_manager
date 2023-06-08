@@ -8,6 +8,8 @@
     <artifactId>task_manager</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
+    <name>Task Manager</name>
+    <description>Final Project</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

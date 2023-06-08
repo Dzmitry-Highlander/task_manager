@@ -3,6 +3,8 @@ package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExecutorTaskDTO {
+    @JsonProperty("executor_task_id")
+    private Long executorTaskID;
     @JsonProperty("executor_id")
     private Long executorID;
     @JsonProperty("task_id")
@@ -11,9 +13,18 @@ public class ExecutorTaskDTO {
     public ExecutorTaskDTO() {
     }
 
-    public ExecutorTaskDTO(Long executorID, Long taskID) {
+    public ExecutorTaskDTO(Long executorTaskID, Long executorID, Long taskID) {
+        this.executorTaskID = executorTaskID;
         this.executorID = executorID;
         this.taskID = taskID;
+    }
+
+    public Long getExecutorTaskID() {
+        return executorTaskID;
+    }
+
+    public void setExecutorTaskID(Long executorTaskID) {
+        this.executorTaskID = executorTaskID;
     }
 
     public Long getExecutorID() {

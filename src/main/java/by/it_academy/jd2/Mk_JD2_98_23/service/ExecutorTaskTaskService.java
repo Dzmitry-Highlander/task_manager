@@ -1,8 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorTaskService;
 
@@ -16,22 +15,22 @@ public class ExecutorTaskTaskService implements IExecutorTaskService {
     }
 
     @Override
-    public List<ExecutorDTO> get() {
+    public List<ExecutorTaskDTO> get() {
         return executorTaskDao.get();
     }
 
     @Override
-    public ExecutorCreateDTO get(int id) {
+    public ExecutorTaskDTO get(Long id) {
         return executorTaskDao.get(id);
     }
 
     @Override
-    public ExecutorCreateDTO save(ExecutorCreateDTO executorCreateDTO) {
-        return executorTaskDao.save(executorCreateDTO);
-    }
+    public ExecutorTaskDTO save(ExecutorTaskCreateDTO item) {
+        ExecutorTaskDTO dto = new ExecutorTaskDTO();
 
-    @Override
-    public void save(ExecutorTaskCreateDTO item) {
-        executorTaskDao.save(item);
+        dto.setExecutorID(item.getExecutorID());
+        dto.setTaskID(item.getTaskID());
+
+        return executorTaskDao.save(dto);
     }
 }
