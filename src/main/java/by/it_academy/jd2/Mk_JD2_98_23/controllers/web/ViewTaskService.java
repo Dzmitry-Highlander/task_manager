@@ -15,13 +15,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 
-@WebServlet("/api/task/all")
-public class AllTaskService extends HttpServlet {
+@WebServlet("/api/task/view")
+public class ViewTaskService extends HttpServlet {
     private static final String SORT = "sort";
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
-    public AllTaskService() {
+    public ViewTaskService() {
         this.taskService = TaskServiceFactory.getInstance();
         this.objectMapper = ObjectMapperFactory.getInstance();
         this.objectMapper.findAndRegisterModules();
