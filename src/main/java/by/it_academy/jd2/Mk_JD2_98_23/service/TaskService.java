@@ -59,6 +59,6 @@ public class TaskService implements ITaskService {
 
     @Override
     public boolean update(int statusCode) {
-        return taskDao.update(statusCode);
+        return false;
     }
 }
