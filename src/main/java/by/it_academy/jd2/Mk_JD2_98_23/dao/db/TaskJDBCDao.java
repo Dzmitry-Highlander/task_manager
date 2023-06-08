@@ -90,6 +90,26 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
+    public TaskDTO update(TaskDTO item) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE app.task " +
+                     "SET deadline = ?, status_id = ?;")) {
+            ps.setObject(1, item.getDeadline());
+            ps.setLong(2, item.getStatus().getId());
+
+            int rowsInserted = ps.executeUpdate();
+
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return item;
+    }
+
+    @Override
     public LinkedHashMap<Long, TaskDTO> get(Sort sort) {
         LinkedHashMap<Long, TaskDTO> data = new LinkedHashMap<>();
         String statement = "SELECT task_id, header, description, deadline, " +

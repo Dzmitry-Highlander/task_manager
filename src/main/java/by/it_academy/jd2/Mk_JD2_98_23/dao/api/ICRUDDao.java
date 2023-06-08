@@ -9,5 +9,7 @@ public interface ICRUDDao<T> {
 
     T save(T item);
 
+    T update(T item);
+
     //TODO update(), delete()
 }
