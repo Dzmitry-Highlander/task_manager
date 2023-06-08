@@ -41,6 +41,6 @@ public class AllTaskService extends HttpServlet {
             dtos = taskService.getSorted(sortLong);
         }
 
-        writer.write(objectMapper.writeValueAsString(dtos));
+        writer.write(objectMapper.writeValueAsString(dtos.values()));
     }
 }
