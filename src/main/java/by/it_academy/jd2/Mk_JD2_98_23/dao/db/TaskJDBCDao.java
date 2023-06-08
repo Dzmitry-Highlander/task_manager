@@ -28,6 +28,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
+                //TODO check setStatus() work
                 dto.setStatus(rs.getObject(2, StatusDTO.class));
 
                 data.add(dto);
@@ -56,6 +57,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
+                //TODO check setStatus() work
                 dto.setStatus(rs.getObject(2, StatusDTO.class));
             }
         } catch (Exception e) {
@@ -106,6 +108,7 @@ public class TaskJDBCDao implements ITaskDao {
                 dto.setHeader(rs.getString("header"));
                 dto.setDescription(rs.getString("description"));
                 dto.setDeadline(rs.getDate("deadline").toLocalDate());
+                //TODO check setStatus() work
                 dto.setStatus(new StatusDTO(rs.getLong("status_id"), rs.getString("status")));
 
                 data.put(key, dto);
