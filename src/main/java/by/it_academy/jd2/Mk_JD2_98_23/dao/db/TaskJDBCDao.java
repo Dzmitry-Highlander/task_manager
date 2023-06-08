@@ -90,12 +90,13 @@ public class TaskJDBCDao implements ITaskDao {
     @Override
     public LinkedHashMap<Long, TaskDTO> get(Sort sort) {
         LinkedHashMap<Long, TaskDTO> data = new LinkedHashMap<>();
+        String statement = "SELECT task_id, header, description, deadline, " +
+                "(SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status, " +
+                "(SELECT status_id FROM app.status WHERE task.status_id = status.status_id) AS status_id " +
+                "FROM app.task ORDER BY " + sort.getSort() + ";";
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT task_id, header, description, deadline, " +
-                     "(SELECT status FROM app.status WHERE task.status_id = status.status_id) AS status, " +
-                     "(SELECT status_id FROM app.status WHERE task.status_id = status.status_id) AS status_id " +
-                     "FROM app.task ORDER BY " + sort.getSort() + ";")) {
+             PreparedStatement ps = conn.prepareStatement(statement)) {
             ResultSet rs = ps.executeQuery();
             Long key = 0L;
 
