@@ -1,7 +1,5 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
