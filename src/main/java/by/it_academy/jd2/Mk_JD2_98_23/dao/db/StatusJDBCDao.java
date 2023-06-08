@@ -76,4 +76,24 @@ public class StatusJDBCDao implements IStatusDao {
 
         return item;
     }
+
+    @Override
+    public StatusDTO update(StatusDTO item) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE app.status " +
+                     "SET status = ? WHERE status_id = ?;")) {
+            ps.setString(1, item.getStatus());
+            ps.setLong(2, item.getId());
+
+            int rowsInserted = ps.executeUpdate();
+
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return item;
+    }
 }

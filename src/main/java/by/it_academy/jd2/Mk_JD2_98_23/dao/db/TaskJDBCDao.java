@@ -93,9 +93,10 @@ public class TaskJDBCDao implements ITaskDao {
     public TaskDTO update(TaskDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE app.task " +
-                     "SET deadline = ?, status_id = ?;")) {
+                     "SET deadline = ?, status_id = ? WHERE task_id = ?;")) {
             ps.setObject(1, item.getDeadline());
             ps.setLong(2, item.getStatus().getId());
+            ps.setLong(3, item.getId());
 
             int rowsInserted = ps.executeUpdate();
 

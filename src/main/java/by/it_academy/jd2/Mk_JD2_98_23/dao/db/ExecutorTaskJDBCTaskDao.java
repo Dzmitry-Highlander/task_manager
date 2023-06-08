@@ -76,4 +76,25 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
 
         return item;
     }
+
+    @Override
+    public ExecutorTaskDTO update(ExecutorTaskDTO item) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE app.executor_task " +
+                     "SET executor_id = ?, task_id = ? WHERE executor_task_id = ?;")) {
+            ps.setLong(1, item.getExecutorID());
+            ps.setLong(2, item.getTaskID());
+            ps.setLong(3, item.getExecutorTaskID());
+
+            int rowsInserted = ps.executeUpdate();
+
+            if (rowsInserted == 0) {
+                throw new DataErrorException("Ошибка вставки данных: ни одна строка не была добавлена таблицу.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return item;
+    }
 }
