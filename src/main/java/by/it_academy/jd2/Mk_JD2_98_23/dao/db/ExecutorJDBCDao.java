@@ -1,6 +1,8 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.StatusDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
@@ -36,10 +38,28 @@ public class ExecutorJDBCDao implements IExecutorDao {
         return data;
     }
 
-    //TODO ExecutorCreateDTO get(Long id)
     @Override
     public ExecutorDTO get(Long id) {
-        return null;
+        ExecutorDTO dto = null;
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn
+                     .prepareStatement("SELECT executor_id, name FROM app.task WHERE executor_id = ? " +
+                             "ORDER BY task_id ASC")) {
+
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                dto = new ExecutorDTO();
+                dto.setId(rs.getLong("executor_id"));
+                dto.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return dto;
     }
 
     @Override
