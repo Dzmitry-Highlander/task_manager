@@ -20,7 +20,6 @@ public class ViewTaskService extends HttpServlet {
     private static final String SORT = "sort";
     private static final int SORT_DEFAULT = 1;
     private static final String FILTER = "filter";
-    private static final int FILTER_DEFAULT = 1;
     private final ITaskService taskService;
     private final ObjectMapper objectMapper;
 
