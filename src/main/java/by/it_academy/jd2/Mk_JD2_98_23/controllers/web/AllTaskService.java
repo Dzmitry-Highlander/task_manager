@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 @WebServlet("/api/task/all")
 public class AllTaskService extends HttpServlet {
@@ -42,14 +41,6 @@ public class AllTaskService extends HttpServlet {
             dtos = taskService.getSorted(sortLong);
         }
 
-        StringBuilder result = new StringBuilder();
-
-        for (Map.Entry<Long, TaskDTO> entry : dtos.entrySet()) {
-            TaskDTO dto = entry.getValue();
-
-            result.append(objectMapper.writeValueAsString(dto));
-        }
-
-        writer.write(String.valueOf(result));
+        writer.write(objectMapper.writeValueAsString(dtos));
     }
 }

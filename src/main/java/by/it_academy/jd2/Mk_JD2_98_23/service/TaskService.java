@@ -44,7 +44,6 @@ public class TaskService implements ITaskService {
     @Override
     public LinkedHashMap<Long, TaskDTO> getSorted(int sort) {
         Sort sortParam = switch (sort) {
-            case 1 -> Sort.ID_ASC;
             case -1 -> Sort.ID_DESC;
             case 2 -> Sort.HEADER_ASC;
             case -2 -> Sort.HEADER_DESC;
@@ -52,7 +51,7 @@ public class TaskService implements ITaskService {
             case -3 -> Sort.DEADLINE_DESC;
             case 4 -> Sort.STATUS_ASC;
             case -4 -> Sort.STATUS_DESC;
-            default -> throw new RuntimeException();
+            default -> Sort.ID_ASC;
         };
 
         return taskDao.get(sortParam);
