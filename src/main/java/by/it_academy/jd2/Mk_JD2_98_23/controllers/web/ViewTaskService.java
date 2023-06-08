@@ -33,7 +33,7 @@ public class ViewTaskService extends HttpServlet {
         resp.setContentType("application/json");
 
         PrintWriter writer = resp.getWriter();
-        LinkedHashMap<Long, TaskDTO> dtos = null;
+        LinkedHashMap<Long, TaskDTO> dtos;
 
         if (req.getParameter(SORT) != null) {
             String sort = req.getParameter(SORT);
