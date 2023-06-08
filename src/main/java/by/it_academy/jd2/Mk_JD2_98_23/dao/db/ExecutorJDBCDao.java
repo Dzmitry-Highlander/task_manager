@@ -41,8 +41,8 @@ public class ExecutorJDBCDao implements IExecutorDao {
         ExecutorDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
-                     .prepareStatement("SELECT executor_id, name FROM app.task WHERE executor_id = ? " +
-                             "ORDER BY task_id ASC")) {
+                     .prepareStatement("SELECT executor_id, name FROM app.executor WHERE executor_id = ? " +
+                             "ORDER BY executor_id ASC")) {
 
             ps.setLong(1, id);
 

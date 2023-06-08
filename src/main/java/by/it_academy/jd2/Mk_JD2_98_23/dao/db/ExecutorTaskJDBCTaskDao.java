@@ -1,37 +1,48 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     //TODO List<ExecutorDTO> get()
     @Override
-    public List<ExecutorDTO> get() {
-        return null;
-    }
-
-    //TODO ExecutorCreateDTO get(int id)
-    @Override
-    public ExecutorDTO get(Long id) {
-        return null;
-    }
-
-    //TODO save(ExecutorCreateDTO item);
-    @Override
-    public ExecutorDTO save(ExecutorDTO item) {
+    public List<ExecutorTaskDTO> get() {
         return null;
     }
 
     @Override
-    public void save(ExecutorTaskCreateDTO item) {
+    public ExecutorTaskDTO get(Long id) {
+        ExecutorTaskDTO dto = null;
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn
+                     .prepareStatement("SELECT executor_task_id, executor_id, task_id FROM app.executor_task" +
+                             " WHERE executor_task_id = ? ORDER BY status_id ASC")) {
+
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                dto = new ExecutorTaskDTO();
+                dto.setExecutorID(rs.getLong("executor_id"));
+                dto.setTaskID(rs.getLong("task_id"));
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return dto;
+    }
+
+    @Override
+    public ExecutorTaskDTO save(ExecutorTaskDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
                      "VALUES (?, ?);")) {
@@ -45,5 +56,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
         } catch (Exception e) {
             throw new DataErrorException(e.getMessage(), e);
         }
+
+        return item;
     }
 }

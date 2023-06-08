@@ -121,9 +121,9 @@ public class TaskJDBCDao implements ITaskDao {
         return data;
     }
 
+    //TODO getShort()
     @Override
-    //TODO boolean update(int statusCode)
-    public boolean update(int statusCode) {
-        return false;
+    public TaskDTO getShort() {
+        return null;
     }
 }

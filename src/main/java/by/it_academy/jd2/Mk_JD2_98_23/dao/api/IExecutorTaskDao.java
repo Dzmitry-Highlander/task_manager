@@ -1,8 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.api;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
 
-public interface IExecutorTaskDao extends ICRUDDao<ExecutorDTO> {
-    void save(ExecutorTaskCreateDTO item);
+public interface IExecutorTaskDao extends ICRUDDao<ExecutorTaskDTO> {
 }

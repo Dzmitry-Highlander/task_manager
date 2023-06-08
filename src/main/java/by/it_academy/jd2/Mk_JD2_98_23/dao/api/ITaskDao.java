@@ -9,7 +9,5 @@ import java.util.LinkedHashMap;
 public interface ITaskDao extends ICRUDDao<TaskDTO> {
     LinkedHashMap<Long, TaskDTO> get(Sort sort);
 
-    boolean update(int statusCode);
-
-    //TODO getShort();
+    TaskDTO getShort();
 }

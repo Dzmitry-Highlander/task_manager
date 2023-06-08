@@ -17,7 +17,7 @@ public class StatusJDBCDao implements IStatusDao {
         List<StatusDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT status_id, status FROM app.task " +
+             PreparedStatement ps = conn.prepareStatement("SELECT status_id, status FROM app.status " +
                      "ORDER BY status_id ASC;")) {
             ResultSet rs = ps.executeQuery();
 
@@ -62,7 +62,7 @@ public class StatusJDBCDao implements IStatusDao {
     @Override
     public StatusDTO save(StatusDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor(name) VALUES (?);")) {
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO app.status(status) VALUES (?);")) {
             ps.setString(1, item.getStatus());
 
             int rowsInserted = ps.executeUpdate();
