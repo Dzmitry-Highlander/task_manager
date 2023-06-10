@@ -113,6 +113,25 @@ public class TaskJDBCDao implements ITaskDao {
     }
 
     @Override
+    public boolean delete(Long id) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             //TODO preparedStatement
+             PreparedStatement ps = conn.prepareStatement("DELETE  FROM app.task WHERE task_id = ?;")) {
+            ps.setLong(1, id);
+
+            int rowsDeleted = ps.executeUpdate();
+
+            if (rowsDeleted == 0) {
+                throw new DataErrorException("Ошибка удаления данных.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return true;
+    }
+
+    @Override
     public LinkedHashMap<Long, TaskDTO> get(Sort sort) {
         LinkedHashMap<Long, TaskDTO> data = new LinkedHashMap<>();
         String statement = "SELECT task_id, header, description, deadline, " +

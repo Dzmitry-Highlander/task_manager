@@ -97,4 +97,23 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
 
         return item;
     }
+
+    @Override
+    public boolean delete(Long id) {
+        try (Connection conn = new DatabaseConnection().getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE executor_task_id, executor_id, task_id " +
+                     "FROM app.executor_task WHERE executor_task_id = ?;")) {
+            ps.setLong(1, id);
+
+            int rowsDeleted = ps.executeUpdate();
+
+            if (rowsDeleted == 0) {
+                throw new DataErrorException("Ошибка удаления данных.");
+            }
+        } catch (Exception e) {
+            throw new DataErrorException(e.getMessage(), e);
+        }
+
+        return true;
+    }
 }
