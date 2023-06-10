@@ -2,7 +2,7 @@ package by.it_academy.jd2.Mk_JD2_98_23.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ExecutorTaskDTO {
+public class ExecutorCreateUpdateDTO {
     @JsonProperty("executor_task_id")
     private Long executorTaskID;
     @JsonProperty("executor_id")
@@ -10,10 +10,10 @@ public class ExecutorTaskDTO {
     @JsonProperty("task_id")
     private Long taskID;
 
-    public ExecutorTaskDTO() {
+    public ExecutorCreateUpdateDTO() {
     }
 
-    public ExecutorTaskDTO(Long executorTaskID, Long executorID, Long taskID) {
+    public ExecutorCreateUpdateDTO(Long executorTaskID, Long executorID, Long taskID) {
         this.executorTaskID = executorTaskID;
         this.executorID = executorID;
         this.taskID = taskID;

@@ -1,7 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service;
 
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskCreateDTO;
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateUpdateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.IExecutorTaskService;
 
@@ -15,18 +15,18 @@ public class ExecutorTaskTaskService implements IExecutorTaskService {
     }
 
     @Override
-    public List<ExecutorTaskDTO> get() {
+    public List<ExecutorCreateUpdateDTO> get() {
         return executorTaskDao.get();
     }
 
     @Override
-    public ExecutorTaskDTO get(Long id) {
+    public ExecutorCreateUpdateDTO get(Long id) {
         return executorTaskDao.get(id);
     }
 
     @Override
-    public ExecutorTaskDTO save(ExecutorTaskCreateDTO item) {
-        ExecutorTaskDTO dto = new ExecutorTaskDTO();
+    public ExecutorCreateUpdateDTO save(ExecutorTaskCreateDTO item) {
+        ExecutorCreateUpdateDTO dto = new ExecutorCreateUpdateDTO();
 
         dto.setExecutorID(item.getExecutorID());
         dto.setTaskID(item.getTaskID());

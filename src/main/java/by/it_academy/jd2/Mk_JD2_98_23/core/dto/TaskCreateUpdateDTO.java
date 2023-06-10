@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
-public class TaskCreateDTO {
-    //TODO добавить поле для delete()
+public class TaskCreateUpdateDTO {
     @JsonProperty("header")
     private String header;
     @JsonProperty("description")
@@ -15,10 +14,10 @@ public class TaskCreateDTO {
     @JsonProperty("status_id")
     private Long status;
 
-    public TaskCreateDTO() {
+    public TaskCreateUpdateDTO() {
     }
 
-    public TaskCreateDTO(String header, String description, LocalDate deadline, Long status) {
+    public TaskCreateUpdateDTO(String header, String description, LocalDate deadline, Long status) {
         this.header = header;
         this.description = description;
         this.deadline = deadline;

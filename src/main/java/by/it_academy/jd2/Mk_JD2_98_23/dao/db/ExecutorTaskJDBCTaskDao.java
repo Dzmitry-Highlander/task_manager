@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.dao.db;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorTaskDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.ExecutorCreateUpdateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IExecutorTaskDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.db.ds.DatabaseConnection;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.exceptions.DataErrorException;
@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     @Override
-    public List<ExecutorTaskDTO> get() {
-        List<ExecutorTaskDTO> data = new ArrayList<>();
+    public List<ExecutorCreateUpdateDTO> get() {
+        List<ExecutorCreateUpdateDTO> data = new ArrayList<>();
 
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT executor_id, name FROM app.executor " +
@@ -23,7 +23,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ExecutorTaskDTO dto = new ExecutorTaskDTO();
+                ExecutorCreateUpdateDTO dto = new ExecutorCreateUpdateDTO();
 
                 data.add(dto);
             }
@@ -35,8 +35,8 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     }
 
     @Override
-    public ExecutorTaskDTO get(Long id) {
-        ExecutorTaskDTO dto = null;
+    public ExecutorCreateUpdateDTO get(Long id) {
+        ExecutorCreateUpdateDTO dto = null;
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn
                      .prepareStatement("SELECT executor_task_id, executor_id, task_id FROM app.executor_task" +
@@ -47,7 +47,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                dto = new ExecutorTaskDTO();
+                dto = new ExecutorCreateUpdateDTO();
                 dto.setExecutorID(rs.getLong("executor_id"));
                 dto.setTaskID(rs.getLong("task_id"));
             }
@@ -59,8 +59,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     }
 
     @Override
-    public ExecutorTaskDTO save(ExecutorTaskDTO item) {
-        //TODO RETURNING ID
+    public ExecutorCreateUpdateDTO save(ExecutorCreateUpdateDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO app.executor_task(executor_id, task_id) " +
                      "VALUES (?, ?);")) {
@@ -79,7 +78,7 @@ public class ExecutorTaskJDBCTaskDao implements IExecutorTaskDao {
     }
 
     @Override
-    public ExecutorTaskDTO update(ExecutorTaskDTO item) {
+    public ExecutorCreateUpdateDTO update(ExecutorCreateUpdateDTO item) {
         try (Connection conn = new DatabaseConnection().getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE app.executor_task " +
                      "SET executor_id = ?, task_id = ? WHERE executor_task_id = ?;")) {
