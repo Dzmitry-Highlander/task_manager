@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.service;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateUpdateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.IStatusDao;
 import by.it_academy.jd2.Mk_JD2_98_23.dao.api.ITaskDao;
@@ -30,7 +30,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public TaskDTO save(TaskCreateDTO item) {
+    public TaskDTO save(TaskCreateUpdateDTO item) {
         TaskDTO dto = new TaskDTO();
 
         dto.setHeader(item.getHeader());

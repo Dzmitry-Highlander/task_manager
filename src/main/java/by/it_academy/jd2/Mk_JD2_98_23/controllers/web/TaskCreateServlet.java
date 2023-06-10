@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_98_23.controllers.web;
 
-import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateDTO;
+import by.it_academy.jd2.Mk_JD2_98_23.core.dto.TaskCreateUpdateDTO;
 import by.it_academy.jd2.Mk_JD2_98_23.service.api.ITaskService;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.ObjectMapperFactory;
 import by.it_academy.jd2.Mk_JD2_98_23.service.factory.TaskServiceFactory;
@@ -30,7 +30,7 @@ public class TaskCreateServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         PrintWriter writer = resp.getWriter();
-        TaskCreateDTO dto = objectMapper.readValue(req.getInputStream(), TaskCreateDTO.class);
+        TaskCreateUpdateDTO dto = objectMapper.readValue(req.getInputStream(), TaskCreateUpdateDTO.class);
 
         taskService.save(dto);
         writer.write(objectMapper.writeValueAsString(dto));
